@@ -26,6 +26,7 @@
   ],
   "dependencies": {
     "d3": "~3.4.11",
-    "requirejs": "~2.1.14"
+    "requirejs": "~2.1.14",
+    "jquery": "~2.1.1"
   }
 }
