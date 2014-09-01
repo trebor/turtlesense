@@ -1,0 +1,31 @@
+{
+  "name": "turtlesense",
+  "version": "0.0.0",
+  "homepage": "http://treboresque.github.io/turtlesense/",
+  "authors": [
+    "Robert Harris <trebor@trebor.org>"
+  ],
+  "description": "turtle sense map",
+  "main": "js/main.js",
+  "moduleType": [
+    "amd"
+  ],
+  "keywords": [
+    "turtle",
+    "map",
+    "d3",
+    "conservation"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "d3": "~3.4.11",
+    "requirejs": "~2.1.14"
+  }
+}
