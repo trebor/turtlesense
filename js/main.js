@@ -5,10 +5,8 @@ requirejs.config({
     }
 });
 
-// app starts here
-
 define(['d3'], function (d3) {
-  console.log("d3", d3);
+  console.log("d3 the new", d3);
   console.log("hello, world! you look amazing!");
 });
 
