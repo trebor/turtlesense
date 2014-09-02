@@ -6,24 +6,17 @@ body {
   flex-direction: column;
 }
 
-.header {
-  height: 100px;
-  background: red;
+.navbar {
+  margin-bottom: 0px;
 }
 
 .content {
   flex: 1;
-  background: green;
   display: flex;
   flex-direction: row;
 }
 
-.control {
-  width: 100px;
-  background: lightblue;
-}
-
 .chart {
   flex: 1 1 100%;
-  background: lightgreen;
+  /* background: lightgreen; */
 }
