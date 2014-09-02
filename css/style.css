@@ -1,0 +1,25 @@
+body {
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  flex: 0 0 50px;
+  background: pink;
+}
+
+.content {
+  flex: 1 1 100%;
+  display: flex;
+}
+
+.control {
+  flex: 0 0 100px;
+  background: lightblue;
+}
+
+.chart {
+  flex: 1 1 100%;
+  background: lightgreen;
+}
