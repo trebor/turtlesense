@@ -1,0 +1,78 @@
+/*---------------------------------------------------
+ * Colors
+ *--------------------------------------------------*/
+// These constants are colors taken from go/colors.
+
+//---------------------------------------------------
+// Primary Twitter blue
+//---------------------------------------------------
+$tw-blue: #55acee;
+
+//---------------------------------------------------
+// Secondary colors
+//---------------------------------------------------
+$tw-orange: #ffac33;
+$tw-green:  #77b255;
+$tw-purple: #9266cc;
+$tw-red:    #dd2e44;
+$tw-yellow: #ffcc4d;
+
+//---------------------------------------------------
+// Primary blues
+//---------------------------------------------------
+$tw-text-color: #292f33;
+$tw-dark-blue:  #226699;
+//tw-blue
+$tw-light-blue: #88c9f9;
+$tw-white:      #ffffff;
+
+//---------------------------------------------------
+// Primary grays
+//---------------------------------------------------
+$tw-dark-gray:   #66757f;
+$tw-medium-gray: #8899a6;
+$tw-gray:        #ccd6dd;
+$tw-border-gray: #e1e8ed;
+$tw-faint-gray:  #f5f8fa;
+
+//---------------------------------------------------
+// Secondary color variants
+//---------------------------------------------------
+
+$tw-dark-orange:  #f4900c;
+//tw-orange
+//tw-yellow
+$tw-light-yellow: #ffd983;
+$tw-faded-yellow: #ffe8b6;
+
+$tw-dark-green:   #3e721d;
+$tw-deep-green:   #5c913b;
+//tw-green
+$tw-light-green:  #a6d388;
+$tw-faded-green:  #c6e5b3;
+
+//tw-dark-blue
+$tw-deep-blue:    #3b88c3;
+//tw-blue
+//tw-light-blue
+$tw-faded-blue:   #bbddf5;
+
+$tw-dark-purple:  #553788;
+$tw-deep-purple:  #744eaa;
+//tw-purple
+$tw-light-purple: #aa8dd8;
+$tw-faded-purple: #cbb7ea;
+
+$tw-dark-red:     #a0041e;
+$tw-deep-red:     #be1931;
+//tw-red
+$tw-light-red:    #ea596e;
+$tw-faded-red:    #f4abba;
+
+//---------------------------------------------------
+// Feature specific colors
+//---------------------------------------------------
+
+$tw-pressed-cell-color: #ebeef0;
+$tw-unread-cell-color:  #f3f9fe;
+$tw-alert-orange:       #e95f28;

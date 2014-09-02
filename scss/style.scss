@@ -1,0 +1,33 @@
+@import 'compassFlexbox';
+
+html {
+  margin: 0px;
+}
+
+body {
+  margin: 0px;
+
+  @include display-flex;
+  @include flex-direction(column);
+
+  .header {
+    height: 50px;
+    background: red;
+  }
+
+  .content {
+    @include flex(1 0 0);
+
+    @include display-flex;
+    @include flex-direction(row);
+
+    .control {
+      width: 200px;
+      background: lightgreen;
+    }
+
+    .chart {
+      @include flex(1 0 0);
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "turtlesense",
+  "version": "0.0.0",
+  "description": "turtle sense map",
+  "main": "GruntFile.js",
+  "dependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-compass": "^0.8.0",
+    "grunt-contrib-sass": "^0.7.3",
+    "grunt-contrib-uglify": "^0.4.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "matchdep": "^0.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://treboresque.github.io/turtlesense/"
+  },
+  "keywords": [
+    "turtles",
+    "map",
+    "d3",
+    "conservation"
+  ],
+  "author": "Robert Harris <trebor@trebor.org>",
+  "license": "MIT"
+}
