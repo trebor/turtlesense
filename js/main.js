@@ -21,8 +21,10 @@ requirejs.config({
 define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, Map) {
 
   var data = [
-    {lat: 35.2120272, lng: -75.6824722, name: "Nest East"},
-    {lat: 35.193950,  lng: -75.738820 , name: "Nest West"},
+    {lat: 35.2120272, lng: -75.6824722, name: "1. Athena"    },
+    {lat: 35.193950 , lng: -75.738820 , name: "2. Demeter"   },
+    {lat: 35.234716 , lng: -75.570137 , name: "3. Iris"      },
+    {lat: 34.582251 , lng: -76.533506 , name: "4. Persephone"},
   ];
 
   var chart = new Map($(".chart").get(0));

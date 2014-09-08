@@ -25,3 +25,9 @@ body {
   position: absolute;
   display: none;
 }
+
+.nest-details > .jumbotron {
+  padding-top: 15px;
+  padding-bottom: 20px;
+  margin: 0px;
+}

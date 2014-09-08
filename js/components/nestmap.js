@@ -39,9 +39,9 @@ var module = function(chartNode, customOptions, events) {
     nestCircles
       .enter()
       .append("circle")
-      .attr("r", 20)
+      .attr("r", 10)
       .attr("opacity", 0.8)
-      .style("fill", "green")
+      .style("fill", "red")
       .on("mouseenter", onMouseEnter)
       .on("mouseout", onMouseExit);
   }

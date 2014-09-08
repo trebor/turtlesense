@@ -4,11 +4,19 @@ var module = function() {
 
   var $nestDetail = $(".nest-details");
   var $name = $nestDetail.find(".name");
-  console.log("$name", $name);
+  var $parent = $nestDetail.parent();
+
   function show(position, nest) {
+    var xOffset = $parent.width() / 2 > position.x ? 0 : $nestDetail.width();
+    var yOffset = $parent.height() / 2 > position.y ? 0 : $nestDetail.height();
+
+    console.log("position", position);
+    console.log("$parent.width()", $parent.width());
+    console.log("$parent.height()", $parent.height());
+
     $nestDetail
-      .css("left", position.x)
-      .css("top", position.y)
+      .css("left", position.x - xOffset)
+      .css("top", position.y - yOffset)
       .show();
     $name.text(nest.name);
   }
