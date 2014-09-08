@@ -52,15 +52,17 @@ var module = function(chartNode, customOptions, extendedEvents) {
     // cope with adding to map
 
     overlay.onAdd = function() {
+
       overlayLayerDiv = this.getPanes().overlayMouseTarget;
+
+      var $div = $(map.getDiv());
       svg = d3.select(overlayLayerDiv)
         .append("svg")
-        .attr("width", "100%")
-        .attr("height", "100%");
+        .attr("width", $div.width())
+        .attr("height", $div.height());
 
       addMapEventListener("dragend", onDrag);
       addMapEventListener("drag", onDrag);
-
       dispatch.mapReady();
     };
 
@@ -108,8 +110,12 @@ var module = function(chartNode, customOptions, extendedEvents) {
       new google.maps.LatLng(position.lat, position.lng));
   }
 
-  function addMapEventListener(event, listener) {
-    google.maps.event.addListener(map, event, listener);
+  function addMapEventListener(event, action) {
+    return google.maps.event.addListener(map, event, action);
+  }
+
+  function removeMapEventListener(listener) {
+    return google.maps.event.removeListener(listener);
   }
 
   function getOrigin(overlay) {
@@ -138,6 +144,7 @@ var module = function(chartNode, customOptions, extendedEvents) {
     getOrigin: getOrigin,
     getOffset: getOffset,
     addMapEventListener: addMapEventListener,
+    removeMapEventListener: removeMapEventListener,
     createLayer: createLayer,
     zoomToFit: zoomToFit,
     latLngToScreen: latLngToScreen,

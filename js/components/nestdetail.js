@@ -10,10 +10,6 @@ var module = function() {
     var xOffset = $parent.width() / 2 > position.x ? 0 : $nestDetail.width();
     var yOffset = $parent.height() / 2 > position.y ? 0 : $nestDetail.height();
 
-    console.log("position", position);
-    console.log("$parent.width()", $parent.width());
-    console.log("$parent.height()", $parent.height());
-
     $nestDetail
       .css("left", position.x - xOffset)
       .css("top", position.y - yOffset)
