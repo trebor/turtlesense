@@ -71,13 +71,13 @@ var module = function(chartNode, customOptions, events) {
   }
 
   function zoomToNest(nest) {
-    gMap.zoomToFit([nest]);
     gMap.setSatellite();
+    gMap.zoomToFit([nest]);
   }
 
   function zoomToAll() {
-    gMap.zoomToFit(nests);
     gMap.setRoadmap();
+    gMap.zoomToFit(nests);
   }
 
   var exports = {

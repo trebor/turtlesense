@@ -48,8 +48,6 @@ define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
         nestMap.zoomToNest(nest)
       }
     });
-
-    console.log("nestName", nestName);
   }
 
   function populateMenu() {
