@@ -70,8 +70,20 @@ var module = function(chartNode, customOptions, events) {
       .attr("cy", function(d) {return d.y});
   }
 
+  function zoomToNest(nest) {
+    gMap.zoomToFit([nest]);
+    gMap.setSatellite();
+  }
+
+  function zoomToAll() {
+    gMap.zoomToFit(nests);
+    gMap.setRoadmap();
+  }
+
   var exports = {
     initialize: initialize,
+    zoomToNest: zoomToNest,
+    zoomToAll: zoomToAll
   }
 
   return $.extend({}, gMap, exports);

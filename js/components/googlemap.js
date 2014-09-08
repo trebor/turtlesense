@@ -148,6 +148,8 @@ var module = function(chartNode, customOptions, extendedEvents) {
     createLayer: createLayer,
     zoomToFit: zoomToFit,
     latLngToScreen: latLngToScreen,
+    setSatellite: function() {map.setMapTypeId(google.maps.MapTypeId.SATELLITE)},
+    setRoadmap: function() {map.setMapTypeId(google.maps.MapTypeId.ROADMAP)},
     visualize: function() {},
     setData: function() {},
   };

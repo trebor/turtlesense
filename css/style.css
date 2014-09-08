@@ -22,6 +22,7 @@ body {
 }
 
 .nest-details {
+  pointer-events: none;
   position: absolute;
   display: none;
 }
