@@ -42,6 +42,7 @@ var module = function(chartNode, customOptions, events) {
       .attr("r", 10)
       .attr("opacity", 0.8)
       .style("fill", "red")
+      .on("click", function(d) {zoomToNest(d)})
       .on("mouseenter", onMouseEnter)
       .on("mouseleave", onMouseExit);
   }
