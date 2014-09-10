@@ -34,3 +34,12 @@ body {
   padding-bottom: 20px;
   margin: 0px;
 }
+
+.nest-details .dl-horizontal dt {
+  width: 70px;
+}
+
+.nest-details .dl-horizontal dd {
+  margin-left: 80px;  // dt width + 20;
+}
+
