@@ -20,28 +20,34 @@ requirejs.config({
 
 define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
 
-  var nests = generateData();
+  var DATE_FORMAT = d3.time.format("%Y-%m-%d");
+
   var nestMap = new NestMap($(".chart").get(0));
-  nestMap.initialize(nests);
-  populateMenu();
-  navigateHash();
 
-  function generateData() {
-    var data = [
-      {lat: 35.2120272, lng: -75.6824722, name: "Athena"    },
-      {lat: 35.193950 , lng: -75.738820 , name: "Demeter"   },
-      {lat: 35.235516 , lng: -75.570137 , name: "Iris"      },
-      {lat: 34.582251 , lng: -76.533506 , name: "Persephone"},
-    ];
+  d3.csv("data/nests.csv")
+    .row(transformNest)
+    .get(function(error, rows) {error ? console.log("error", error) : onData(rows)});
 
-    data.forEach(function(nest) {
-      nest.date = new Date();
-    });
-
-    return data;
+  function onData(nests) {
+    console.log("nests", nests);
+    nestMap.initialize(nests);
+    populateMenu(nests);
+    navigateHash(nests);
   }
 
-  function navigateHash() {
+  function transformNest(nest) {
+    var newNest = {
+      id: nest.nest_id,
+      name: nest.comm_id,
+      nestDate: DATE_FORMAT.parse(nest.nest_date),
+      lat: parseFloat(nest.latitude) / 100,
+      lng: parseFloat(nest.longitude) / -100,
+    }
+
+    return (newNest.lng < -80) ? undefined : newNest;
+  }
+
+  function navigateHash(nests) {
     var nestName = window.location.hash.substr(1);
     nests.forEach(function(nest) {
       if (nestName.toLowerCase() == nest.name.toLowerCase()) {
@@ -50,7 +56,7 @@ define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
     });
   }
 
-  function populateMenu() {
+  function populateMenu(nests) {
     $(".see-all").on("click", nestMap.zoomToAll);
     var picker = $(".nest-picker");
     nests.forEach(function(nest) {
