@@ -38,15 +38,17 @@ define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
   function transformNest(nest) {
     var newNest = {
       id: nest.nest_id,
-      name: nest.comm_id,
+      name: nest.sensor_id + " - " + nest.comm_id,
       nestDate: DATE_FORMAT.parse(nest.nest_date),
       lat: parseFloat(nest.latitude) / 100,
       lng: parseFloat(nest.longitude) / -100,
     }
 
-    // show east coast data only
+    // // show east coast data only
 
-    return (newNest.lng < -80) ? undefined : newNest;
+    // return (newNest.lng < -80) ? undefined : newNest;
+
+    return newNest;
   }
 
   function navigateHash(nests) {
