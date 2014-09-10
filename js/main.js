@@ -44,6 +44,8 @@ define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
       lng: parseFloat(nest.longitude) / -100,
     }
 
+    // show east coast data only
+
     return (newNest.lng < -80) ? undefined : newNest;
   }
 

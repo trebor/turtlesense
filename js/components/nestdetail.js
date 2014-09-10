@@ -1,9 +1,12 @@
-define([], function(d3, GoogleMap) {
+define(["d3"], function(d3) {
 
 var module = function() {
 
+  var DATE_FORMAT = d3.time.format("%b %-d, %Y");
+
   var $nestDetail = $(".nest-details");
-  var $name = $nestDetail.find(".name");
+  var $name = $nestDetail.find("#name");
+  var $date = $nestDetail.find("#date");
   var $parent = $nestDetail.parent();
 
   function show(position, nest) {
@@ -15,6 +18,8 @@ var module = function() {
       .css("top", position.y - yOffset)
       .show();
     $name.text(nest.name);
+    $date.text(DATE_FORMAT(nest.nestDate));
+    
   }
   
   function hide() {
