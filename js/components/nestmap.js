@@ -43,7 +43,7 @@ var module = function(chartNode, customOptions, events) {
       .attr("opacity", 0.8)
       .style("fill", "red")
       .on("mouseenter", onMouseEnter)
-      .on("mouseout", onMouseExit);
+      .on("mouseleave", onMouseExit);
   }
 
   function onMouseEnter(nest) {
