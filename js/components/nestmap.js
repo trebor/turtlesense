@@ -74,6 +74,8 @@ var module = function(chartNode, customOptions, events) {
   function zoomToNest(nest) {
     gMap.setSatellite();
     gMap.zoomToFit([nest]);
+    // var pos = {x: 20, y: 20};
+    // nestDetail.show(pos, nest);
   }
 
   function zoomToAll() {

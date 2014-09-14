@@ -2,14 +2,17 @@ requirejs.config({
   baseUrl: 'bower_components',
   paths: {
     d3: 'd3/d3.min',
+    lodash: 'lodash/dist/lodash.min',
     jquery: 'jquery/dist/jquery.min',
     bootstrap: 'bootstrap/dist/js/bootstrap.min',
     async:     'requirejs-plugins/src/async',
 
     // internal components
 
+    baseChart:  '../js/components/basechart',
     nestMap:    '../js/components/nestmap',
     nestDetail: '../js/components/nestdetail',
+    nestChart:  '../js/components/nestchart',
     googleMap:  '../js/components/googlemap'
   },
   shim: {
@@ -35,7 +38,7 @@ define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
 
   function onData(nests) {
     console.log("nests", nests);
-    nests.sort(function(a, b) {return a.name.localeCompare(b.name)});
+    nests.map(addTimeSersies).sort(function(a, b) {return a.name.localeCompare(b.name)});
     nestMap.initialize(nests);
     populateMenu(nests);
     navigateHash(nests);
@@ -84,5 +87,47 @@ define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
       picker.append(li);
     });
   }
-});
 
+  function addTimeSersies(map) {
+    var dateRange = d3.time.scale()
+      .domain([new Date(2014, 8, 1), new Date(2014, 8, 25)]);
+    var samples = 200;
+    var tempRange = d3.scale.linear()
+      .range([18, 28]);
+
+    var energyRange = d3.scale.linear()
+      .range([0, 100]);
+
+    map.temperature = generateRandomTimeSeries(dateRange, tempRange, 30, .1);
+    map.energy = generateRandomTimeSeries(dateRange, tempRange, 30, .1);
+
+    return map;
+  }
+
+  function generateRandomTimeSeries(timeScale, valueScale, sampleCount, volitility) {
+    volitility = volitility || .1;
+    var volitilityScale = d3.scale.linear().range([-volitility, volitility]);
+    var timeSeries = [];
+    var normalValue = Math.random();
+
+    // create samples
+
+    for (var i = 0; i < sampleCount; ++i) {
+
+      // compute value normal
+
+      var dNormal = volitilityScale(Math.random());
+      normalValue += dNormal;
+      normalValue = d3.max([0, d3.min([1, normalValue])]);
+
+      // create record
+
+      timeSeries.push({
+        time: timeScale.invert(i / (sampleCount - 1)),
+        value: valueScale(normalValue),
+      });
+    }
+
+    return timeSeries;
+  }
+});

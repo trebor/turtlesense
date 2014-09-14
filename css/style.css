@@ -28,6 +28,7 @@ body {
 }
 
 .nest-details > .jumbotron {
+  background: eee;
   border: 1px solid #bbb;
   border-radius: 25px;
   padding-top: 15px;
@@ -43,3 +44,26 @@ body {
   margin-left: 80px;  // dt width + 20;
 }
 
+.nest-details #time-series {
+  background: white;
+  width: 400px;
+  height: 200px;
+  margin-bottom: 10px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+path.temperature {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}

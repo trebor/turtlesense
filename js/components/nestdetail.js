@@ -1,4 +1,4 @@
-define(["d3"], function(d3) {
+define(["d3", "nestChart"], function(d3, NestChart) {
 
 var module = function() {
 
@@ -8,9 +8,14 @@ var module = function() {
   var $name = $nestDetail.find("#name");
   var $date = $nestDetail.find("#date");
   var $comm = $nestDetail.find("#comm");
+  var $timeSeries = $nestDetail.find("#time-series");
   var $parent = $nestDetail.parent();
 
+  var chart = new NestChart($timeSeries);
+
   function show(position, nest) {
+
+    chart.setNest(nest);
 
     // establish offset
 
