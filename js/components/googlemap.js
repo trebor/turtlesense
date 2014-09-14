@@ -8,7 +8,7 @@ var module = function(chartNode, customOptions, extendedEvents) {
   var layers = [];
   var overlayLayerDiv;
 
-  var events = ['mapReady', 'mapDraw'];
+  var events = ['mapReady', 'mapDraw', "drag", "zoom"];
   var dispatch = d3.dispatch.apply(d3, extendedEvents ? events.concat(extendedEvents) : events);
 
   // map styling
@@ -63,6 +63,7 @@ var module = function(chartNode, customOptions, extendedEvents) {
 
       addMapEventListener("dragend", onDrag);
       addMapEventListener("drag", onDrag);
+      addMapEventListener("zoom", onZoom);
       dispatch.mapReady();
     };
 
@@ -91,6 +92,11 @@ var module = function(chartNode, customOptions, extendedEvents) {
     // signal a draw
 
     overlay.draw();
+    dispatch.drag();
+  }
+
+  function onZoom() {
+    dispatch.zoom();
   }
 
   function createLayer() {
