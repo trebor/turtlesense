@@ -126,6 +126,7 @@ var module = function(chartNode, customOptions, events) {
     unpinNest();
     gMap.setRoadmap();
     gMap.zoomToFit(nests);
+    draw();
   }
 
   var exports = {
