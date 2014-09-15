@@ -63,7 +63,7 @@ var module = function(chartNode, customOptions, extendedEvents) {
 
       addMapEventListener("dragend", onDrag);
       addMapEventListener("drag", onDrag);
-      addMapEventListener("zoom", onZoom);
+      addMapEventListener("zoom_changed", onZoom);
       dispatch.mapReady();
     };
 
