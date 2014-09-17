@@ -36,6 +36,7 @@ var module = function(chartNode, customOptions, events) {
     gMap.on("mapDraw", draw);
     gMap.on("drag", onDrag);
     gMap.on("zoom", draw);
+    gMap.on("idle", draw);
     gMap.zoomToFit(nests);
   }
 

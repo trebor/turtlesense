@@ -8,7 +8,7 @@ var module = function(chartNode, customOptions, extendedEvents) {
   var layers = [];
   var overlayLayerDiv;
 
-  var events = ['mapReady', 'mapDraw', "drag", "zoom"];
+  var events = ['mapReady', 'mapDraw', "drag", "zoom", "idle"];
   var dispatch = d3.dispatch.apply(d3, extendedEvents ? events.concat(extendedEvents) : events);
 
   // map styling
@@ -56,14 +56,17 @@ var module = function(chartNode, customOptions, extendedEvents) {
       overlayLayerDiv = this.getPanes().overlayMouseTarget;
 
       var $div = $(map.getDiv());
-      svg = d3.select(overlayLayerDiv)
-        .append("svg")
-        .attr("width", $div.width())
-        .attr("height", $div.height());
+      $(window).resize(function() {
+        resize($div);
+      });
+
+      svg = d3.select(overlayLayerDiv).append("svg");
+      resize($div);
 
       addMapEventListener("dragend", onDrag);
       addMapEventListener("drag", onDrag);
       addMapEventListener("zoom_changed", onZoom);
+      addMapEventListener("idle", onIdle);
       dispatch.mapReady();
     };
 
@@ -72,6 +75,12 @@ var module = function(chartNode, customOptions, extendedEvents) {
     overlay.draw = function() {
       dispatch.mapDraw();
     };
+  }
+
+  function resize($div) {
+    svg
+      .attr("width", $div.width())
+      .attr("height", $div.height());
   }
 
   function onDrag() {
@@ -97,6 +106,10 @@ var module = function(chartNode, customOptions, extendedEvents) {
 
   function onZoom() {
     dispatch.zoom();
+  }
+
+  function onIdle() {
+    dispatch.idle();
   }
 
   function createLayer() {
