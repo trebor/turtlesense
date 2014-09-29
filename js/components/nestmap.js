@@ -5,11 +5,15 @@ var module = function(chartNode, customOptions, events) {
   var defaultOptions = {
   }
 
-  var NEST_STATES = {
-    PINNED: "green",
-    HOVERED: "red",
-    DEFAULT: "grey",
-  };
+  var DEFAULT_SCALE = 1;
+  var CLOSE_SCALE = 2;
+
+  var mapScale = d3.scale.linear()
+    .domain([0, 21])
+    .range([.5, 2.2]);
+
+  var STATE_PINNED = "pinned";
+  var STATE_HOVERED = "hovered";
 
   var options = $.extend({}, defaultOptions, customOptions);
 
@@ -35,7 +39,7 @@ var module = function(chartNode, customOptions, events) {
     gMap.on("mapReady", confgureMap);
     gMap.on("mapDraw", draw);
     gMap.on("drag", onDrag);
-    gMap.on("zoom", draw);
+    gMap.on("zoom", onZoom);
     gMap.on("idle", draw);
     gMap.zoomToFit(nests);
   }
@@ -43,40 +47,66 @@ var module = function(chartNode, customOptions, events) {
   function confgureMap() {
     nestLayer = gMap.createLayer();
 
-    var nestCircles = nestLayer.selectAll("circle")
+    var nestCircles = nestLayer.selectAll(".nest")
       .data(nests);
 
-    nestCircles
+    var nestGroups = nestCircles
       .enter()
-      .append("circle")
+      .append("g")
       .classed("nest", true)
-      .attr("r", 10)
-      .attr("opacity", 0.8)
-      .style("fill", NEST_STATES.DEFAULT)
-      .on("click", function(d) {zoomToNest(d)})
-      .on("mouseenter", onMouseEnter)
-      .on("mouseleave", onMouseExit);
+      .on("click", onNestClick)
+      .on("mouseenter", onNestEnter)
+      .on("mouseleave", onNestExit);
+
+    nestGroups
+      .append("circle")
+      .classed("plate", true)
+      .attr("r", 7);
+
+    for (var angle = 0; angle < 360; angle += 120) {
+      nestGroups
+        .append("circle")
+        .classed("egg", true)
+        .attr("r", 2.5)
+        .attr("cy", -3)
+        .attr("transform", "rotate(" + angle + ")");
+    }
   }
 
-  function onMouseEnter(nest) {
+  function onNestEnter(nest) {
     if (nest != pinnedNest) {
       hoverNest(nest);
     }
   }
 
-  function onMouseExit(nest) {
+  function onNestExit(nest) {
     unhoverNest(nest);
+  }
+
+  function onNestClick(nest) {
+    zoomToNest(nest);
   }
 
   function onDrag() {
     unpinNest();
+    draw();
+  }
+
+  function onZoom(zoom) {
+    if (zoom < 19) {
+      unpinNest();
+    }
+    draw();
   }
 
   function draw() {
-    nestLayer.selectAll("circle")
+    var scale = mapScale(gMap.getZoom());
+
+    nestLayer.selectAll(".nest")
       .each(nestLayer.latLngToXy)
-      .attr("cx", function(d) {return d.x})
-      .attr("cy", function(d) {return d.y});
+      .attr("transform", function(d) {
+        return "translate(" + d.x + ", " + d.y + ") scale(" + scale + ")";
+      });
   }
 
   function hoverNest(nest) {
@@ -89,37 +119,41 @@ var module = function(chartNode, customOptions, events) {
     };
 
     nestDetail.show(position, nest);
-    setNestState(NEST_STATES.HOVERED, nest);
+    setNestState(STATE_HOVERED, nest);
   }
 
   function unhoverNest(nest) {
     if (!pinnedNest) {
       nestDetail.hide();
-      setNestState(NEST_STATES.DEFAULT);
+      clearNestStates();
     }
   }
 
   function pinNest(nest) {
-    nestDetail.show({x: 10, y: 10}, nest);
+    nestDetail.show({x: 8, y: 8}, nest);
     pinnedNest = nest;
-    setNestState(NEST_STATES.PINNED, nest);
+    setNestState(STATE_PINNED, nest);
   }
 
   function unpinNest() {
     nestDetail.hide();
-    setNestState(NEST_STATES.DEFAULT);
+    clearNestStates();
     pinnedNest = undefined;
+  }
+
+  function clearNestStates() {
+    setNestState();
   }
 
   function setNestState(state, nest) {
     d3.selectAll(".nest")
-      .filter(function(d) {return nest ? d == nest : true})
-      .style("fill", state);
+      .classed(STATE_PINNED,  function(d) {return d == nest && state == STATE_PINNED})
+      .classed(STATE_HOVERED, function(d) {return d == nest && state == STATE_HOVERED});
   }
 
   function zoomToNest(nest) {
     gMap.setSatellite();
-    gMap.zoomToFit([nest]);
+    gMap.zoomToPoint(nest);
     pinNest(nest);
   }
 

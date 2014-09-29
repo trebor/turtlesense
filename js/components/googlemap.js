@@ -3,6 +3,7 @@ define(["jquery", "d3", "async!http://maps.google.com/maps/api/js?sensor=false"]
 var module = function(chartNode, customOptions, extendedEvents) {
 
   var map;
+  var maxZoomService;
   var svg;
   var overlay;
   var layers = [];
@@ -43,6 +44,7 @@ var module = function(chartNode, customOptions, extendedEvents) {
     // creat the map
 
     map = new google.maps.Map(chartNode, options);
+    maxZoomService = new google.maps.MaxZoomService();
 
     // create the place for the overlay layer
 
@@ -105,7 +107,7 @@ var module = function(chartNode, customOptions, extendedEvents) {
   }
 
   function onZoom() {
-    dispatch.zoom();
+    dispatch.zoom(map.getZoom());
   }
 
   function onIdle() {
@@ -154,6 +156,14 @@ var module = function(chartNode, customOptions, extendedEvents) {
     map.fitBounds(bounds);
   }
 
+  function zoomToPoint(point) {
+    var ll = new google.maps.LatLng(point.lat, point.lng);
+    maxZoomService.getMaxZoomAtLatLng(ll, function(maxZoom) {
+      map.setCenter(ll);
+      map.setZoom(maxZoom.zoom);
+    });
+  }
+
   function getOffset() {
     return getOrigin(overlay);
   }
@@ -162,10 +172,12 @@ var module = function(chartNode, customOptions, extendedEvents) {
     initialize: initialize,
     getOrigin: getOrigin,
     getOffset: getOffset,
+    getZoom: function() {return map.getZoom()},
     addMapEventListener: addMapEventListener,
     removeMapEventListener: removeMapEventListener,
     createLayer: createLayer,
     zoomToFit: zoomToFit,
+    zoomToPoint: zoomToPoint,
     latLngToScreen: latLngToScreen,
     setSatellite: function() {map.setMapTypeId(google.maps.MapTypeId.SATELLITE)},
     setRoadmap: function() {map.setMapTypeId(google.maps.MapTypeId.ROADMAP)},

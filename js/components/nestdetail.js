@@ -3,6 +3,7 @@ define(["d3", "nestChart"], function(d3, NestChart) {
 var module = function() {
 
   var DATE_FORMAT = d3.time.format("%b %-d, %Y");
+  var COMFORT_ZONE = 5;
 
   var $nestDetail = $(".nest-details");
   var $name = $nestDetail.find("#name");
@@ -19,8 +20,12 @@ var module = function() {
 
     // establish offset
 
-    var xOffset = $parent.width() / 2 > position.x ? 0 : $nestDetail.width();
-    var yOffset = $parent.height() / 2 > position.y ? 0 : $nestDetail.height();
+    var xOffset = $parent.width() / 2 > position.x
+      ? -COMFORT_ZONE
+      : $nestDetail.width() + COMFORT_ZONE;
+    var yOffset = $parent.height() / 2 > position.y
+      ? -COMFORT_ZONE
+      : $nestDetail.height() + COMFORT_ZONE;
 
     // plug fields
 

@@ -21,6 +21,32 @@ body {
   flex: 1 1 100%;
 }
 
+.nest {
+  opacity: 0.6;
+  cursor: pointer;
+  fill: #AD421E;
+}
+
+.nest.pinned {
+  opacity: 1.0;
+  fill: #CC3300;
+}
+
+.nest.hovered {
+  opacity: 1.0;
+  fill: #CC3300;
+}
+
+.nest.pinned > .plate,
+.nest.hovered > .plate {
+  stroke-width: .75;
+  stroke: #333;
+}
+
+.nest > .egg {
+  fill: white;
+}
+
 .nest-details {
   pointer-events: none;
   position: absolute;
@@ -30,7 +56,7 @@ body {
 .nest-details > .jumbotron {
   background: eee;
   border: 1px solid #bbb;
-  border-radius: 25px;
+  border-radius: 10px;
   padding-top: 15px;
   padding-bottom: 20px;
   margin: 0px;
