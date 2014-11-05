@@ -158,10 +158,12 @@ var module = function(chartNode, customOptions, extendedEvents) {
 
   function zoomToPoint(point) {
     var ll = new google.maps.LatLng(point.lat, point.lng);
-    maxZoomService.getMaxZoomAtLatLng(ll, function(maxZoom) {
-      map.setCenter(ll);
-      map.setZoom(maxZoom.zoom);
-    });
+    map.setCenter(ll);
+    map.setZoom(21);
+    // maxZoomService.getMaxZoomAtLatLng(ll, function(maxZoom) {
+    //   map.setCenter(ll);
+    //   map.setZoom(maxZoom.zoom);
+    // });
   }
 
   function getOffset() {
@@ -172,6 +174,7 @@ var module = function(chartNode, customOptions, extendedEvents) {
     initialize: initialize,
     getOrigin: getOrigin,
     getOffset: getOffset,
+    getSvg: function() {return svg;},
     getZoom: function() {return map.getZoom()},
     addMapEventListener: addMapEventListener,
     removeMapEventListener: removeMapEventListener,

@@ -24,27 +24,23 @@ body {
 .nest {
   opacity: 0.6;
   cursor: pointer;
-  fill: #AD421E;
 }
 
 .nest.pinned {
   opacity: 1.0;
-  fill: #CC3300;
 }
 
 .nest.hovered {
   opacity: 1.0;
-  fill: #CC3300;
+}
+
+.plate {
+  stroke-width: .25;
+  stroke: #000;
 }
 
 .nest.pinned > .plate,
 .nest.hovered > .plate {
-  stroke-width: .75;
-  stroke: #333;
-}
-
-.nest > .egg {
-  fill: white;
 }
 
 .nest-details {

@@ -37,8 +37,7 @@ define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
     .get(function(error, rows) {error ? console.log("error", error) : onData(rows)});
 
   function onData(nests) {
-    console.log("nests", nests);
-    nests.map(addTimeSersies).sort(function(a, b) {return a.name.localeCompare(b.name)});
+    nests = nests.map(addTimeSersies).sort(function(a, b) {return a.name.localeCompare(b.name)});
     nestMap.initialize(nests);
     populateMenu(nests);
     navigateHash(nests);
@@ -47,7 +46,7 @@ define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
   function transformNest(nest) {
     var newNest = {
       id: nest.nest_id,
-      name: nest.sensor_id,
+      name: nest.sensor_id + ':' + nest.comm_id,
       comm: nest.comm_id,
       nestDate: DATE_FORMAT.parse(nest.nest_date),
       lat: parseLatLong(nest.latitude),
