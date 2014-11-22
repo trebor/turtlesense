@@ -26,8 +26,8 @@ var module = function($chartNode, customOptions, extendedEvents) {
     .orient("left");
 
   var tempLine = d3.svg.line()
-    .x(function(d) { return x(d.time);})
-    .y(function(d) { return y(d.value);});
+    .x(function(d) { return x(d.date);})
+    .y(function(d) { return y(d.temperature);});
 
   function initialize() {
     baseChart.initialize();
@@ -51,11 +51,11 @@ var module = function($chartNode, customOptions, extendedEvents) {
   }
   
   function setNest(nest) {
-    x.domain(d3.extent(nest.temperature, function(d) { return d.time; }));
-    y.domain(d3.extent(nest.temperature, function(d) { return d.value; }));
+    x.domain(d3.extent(nest.records, function(d) { return d.date; }));
+    y.domain(d3.extent(nest.records, function(d) { return d.temperature; }));
 
     d3.select("path.temperature")
-      .datum(nest.temperature)
+      .datum(nest.records)
       .attr("d", tempLine);
 
     d3.select(".y.axis")

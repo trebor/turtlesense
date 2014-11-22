@@ -2,6 +2,7 @@ requirejs.config({
   baseUrl: 'bower_components',
   paths: {
     d3: 'd3/d3.min',
+    queue: 'queue-async/queue.min',
     lodash: 'lodash/dist/lodash.min',
     jquery: 'jquery/dist/jquery.min',
     bootstrap: 'bootstrap/dist/js/bootstrap.min',
@@ -21,31 +22,61 @@ requirejs.config({
 });
 
 
-define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
+define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue, bs, NestMap) {
 
   var DATE_FORMAT = d3.time.format("%Y-%m-%d");
+  var DATETIME_FORMAT = d3.time.format("%Y-%m-%d %H:%M:%S");
   var LAT_LONG_REGEX = /(\d{2,3})(\d{2}\.\d{4})([NESW]?)/g
 
   // construct the map
 
   var nestMap = new NestMap($(".chart").get(0));
 
-  // load the data
+  queue()
+   .defer(d3.csv, 'data/nests.csv')
+   .defer(d3.csv, 'data/records.csv')
+   .await(onData);
 
-  d3.csv("data/nests.csv")
-    .row(transformNest)
-    .get(function(error, rows) {error ? console.log("error", error) : onData(rows)});
+  function onData(error, nests, records) {
+    if (error) {
+      console.error("error", error);
+      return;
+    }
 
-  function onData(nests) {
-    nests = nests.map(addTimeSersies).sort(function(a, b) {return a.name.localeCompare(b.name)});
+    // preprocess records
+
+    records = records.map(transformRecord);
+
+    // construct map of records grouped by nest ID
+
+    var recordsMap = d3.nest()
+      .key(function(d) {return +d.nest_id})
+      .sortValues(function(a, b) {return a.date - b.date;})
+      .map(records);
+
+    // preprocess nests
+
+    nests = nests
+      .map(transformNest)
+      .map(function(nest) {nest.records = recordsMap[nest.id]; return nest})
+      .filter(function(nest) {return nest.records && nest.lng > -80;})
+      .sort(function(a, b) {return a.name.localeCompare(b.name)});
+
     nestMap.initialize(nests);
     populateMenu(nests);
     navigateHash(nests);
   }
 
+  function transformRecord(record) {
+    record.date = DATETIME_FORMAT.parse(record.record_datetime);
+    record.nest_id = +record.nest_id;
+    record.temperature = +record.temperature;
+    return record;
+  }
+
   function transformNest(nest) {
     var newNest = {
-      id: nest.nest_id,
+      id: +nest.nest_id,
       name: nest.sensor_id + ':' + nest.comm_id,
       comm: nest.comm_id,
       nestDate: DATE_FORMAT.parse(nest.nest_date),
@@ -85,22 +116,6 @@ define(['d3', 'jquery', 'bootstrap', 'nestMap'], function (d3, $, bs, NestMap) {
         .append(a);
       picker.append(li);
     });
-  }
-
-  function addTimeSersies(map) {
-    var dateRange = d3.time.scale()
-      .domain([new Date(2014, 8, 1), new Date(2014, 8, 25)]);
-    var samples = 200;
-    var tempRange = d3.scale.linear()
-      .range([18, 28]);
-
-    var energyRange = d3.scale.linear()
-      .range([0, 100]);
-
-    map.temperature = generateRandomTimeSeries(dateRange, tempRange, 30, .1);
-    map.energy = generateRandomTimeSeries(dateRange, tempRange, 30, .1);
-
-    return map;
   }
 
   function generateRandomTimeSeries(timeScale, valueScale, sampleCount, volitility) {
