@@ -5,6 +5,7 @@ var module = function(chartNode, customOptions, events) {
   var defaultOptions = {
   }
 
+  var EGG_COUNT = 4;
   var EGG_LIGHT = 'white';
   var EGG_DARK = '#6C4721';
   var NEST_LIGHT = '#AD421E';
@@ -77,7 +78,7 @@ var module = function(chartNode, customOptions, events) {
         .attr('style', 'stop-color:' + stop.color + ';stop-opacity:1');
     });
 
-    var nestGradient = defs.append('radialGradient')
+    var nestGradient = defs.append('linearGradient')
       .attr('id', 'nestGradient')
       .attr('r', '50%')
       .attr('cx', '35%')
@@ -108,7 +109,7 @@ var module = function(chartNode, customOptions, events) {
       .attr('fill', 'url(#nestGradient)');
 
     nestGroups.selectAll('.egg')
-      .data([0, 1, 2])
+      .data(d3.range(EGG_COUNT))
       .enter()
       .append('circle')
       .classed('egg', true)
@@ -120,7 +121,7 @@ var module = function(chartNode, customOptions, events) {
   }
 
   function eggAngle(egg) {
-    return egg * Math.PI * 2 / 3 + 2;
+    return egg * Math.PI * 2 / EGG_COUNT + 2;
   }
 
   function onNestEnter(nest) {

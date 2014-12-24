@@ -58,13 +58,41 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
 
     nests = nests
       .map(transformNest)
-      .map(function(nest) {nest.records = recordsMap[nest.id]; return nest})
-      .filter(function(nest) {return nest.records && nest.lng > -80;})
+      .filter(function(nest) {return recordsMap[nest.id] && nest.lng > -80;})
+      .map(function(nest) {return nestJoinRecords(nest, recordsMap[nest.id])})
       .sort(function(a, b) {return a.name.localeCompare(b.name)});
 
     nestMap.initialize(nests);
     populateMenu(nests);
     navigateHash(nests);
+  }
+
+  function nestJoinRecords(nest, records) {
+
+    // group records by time
+
+    recordsByTime = d3.nest()
+      .key(function(d) {
+        //return new Date(d.date.getFullYear(), d.date.getMonth(), d.date.getDate(), d.date.getHours());
+        return new Date(d.date.getFullYear(), d.date.getMonth(), d.date.getDate());
+      })
+      .sortValues(function(a, b) {return a.date - b.date;})
+      .entries(records);
+
+    // establish mean temperatures during that time period
+
+    var meanTempsByPeriod = recordsByTime.reduce(function(acc, period) {
+      acc.push({
+        date: new Date(period.key),
+        temperature: d3.mean(period.values, function(d) {return d.temperature;})
+      });
+      return acc;
+    }, []);
+
+    // assign mean temperature to nest
+
+    nest.records = meanTempsByPeriod;
+    return nest;
   }
 
   function transformRecord(record) {
@@ -77,7 +105,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
   function transformNest(nest) {
     var newNest = {
       id: +nest.nest_id,
-      name: nest.sensor_id + ':' + nest.comm_id,
+      name: nest.sensor_id + ':' + nest.comm_id + '(' + nest.nest_id + ')',
       comm: nest.comm_id,
       nestDate: DATE_FORMAT.parse(nest.nest_date),
       lat: parseLatLong(nest.latitude),
