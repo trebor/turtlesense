@@ -5,7 +5,7 @@ var module = function(chartNode, customOptions, events) {
   var defaultOptions = {
   }
 
-  var EGG_COUNT = 4;
+  var EGG_COUNT = 5;
   var EGG_LIGHT = 'white';
   var EGG_DARK = '#6C4721';
   var NEST_LIGHT = '#AD421E';
