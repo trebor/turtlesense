@@ -17,102 +17,95 @@ requirejs.config({
     googleMap:  '../js/components/googlemap'
   },
   shim: {
-    bootstrap: {deps: ['jquery']},
+    bootstrap: {deps: ['jquery']}
   }
 });
 
 
 define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue, bs, NestMap) {
 
-  var DATE_FORMAT = d3.time.format("%Y-%m-%d");
+  var TEMP_FACTOR = 25.6;
+  var MS_INA_DAY = 86400000;
+  var DATA_PATH = 'data/';
+  // var DATA_PATH = '/nests/';
+  var SUMMARY_FILE_EXT = '_Summary.csv';
+  var DATE_FORMAT = d3.time.format("%m/%d/%Y");
   var DATETIME_FORMAT = d3.time.format("%Y-%m-%d %H:%M:%S");
-  var LAT_LONG_REGEX = /(\d{2,3})(\d{2}\.\d{4})([NESW]?)/g
+  var LAT_LONG_REGEX = /(\d{2,3})(\d{2}\.\d{4})([NESW]?)/g;
 
   // construct the map
 
   var nestMap = new NestMap($(".chart").get(0));
 
   queue()
-   .defer(d3.csv, 'data/nests.csv')
-   .defer(d3.csv, 'data/records.csv')
-   .await(onData);
+    .defer(d3.csv, DATA_PATH + 'Nest_Data.csv')
+    .await(onData);
 
-  function onData(error, nests, records) {
+  function onData(error, nests) {
     if (error) {
       console.error("error", error);
       return;
     }
 
-    // preprocess records
-
-    records = records.map(transformRecord);
-
-    // construct map of records grouped by nest ID
-
-    var recordsMap = d3.nest()
-      .key(function(d) {return +d.nest_id})
-      .sortValues(function(a, b) {return a.date - b.date;})
-      .map(records);
-
     // preprocess nests
 
     nests = nests
       .map(transformNest)
-      .filter(function(nest) {return recordsMap[nest.id] && nest.lng > -80;})
-      .map(function(nest) {return nestJoinRecords(nest, recordsMap[nest.id])})
-      .sort(function(a, b) {return a.name.localeCompare(b.name)});
+      .filter(function(nest) {return nest.show;})
+      .sort(function(a, b) {return a.name.localeCompare(b.name);});
 
-    nestMap.initialize(nests);
-    populateMenu(nests);
-    navigateHash(nests);
-  }
+    var summaryQueue = queue();
 
-  function nestJoinRecords(nest, records) {
+    nests.forEach(function(nest) {
+      summaryQueue.defer(function(path, callback) {
+        d3.csv(path, function(error, samples) {
+          nestJoinSamples(nest, samples || []);
+          callback(null, true);
+        });
+      }, DATA_PATH + nest.sensor + SUMMARY_FILE_EXT);
+    });
 
-    // group records by time
-
-    recordsByTime = d3.nest()
-      .key(function(d) {
-        //return new Date(d.date.getFullYear(), d.date.getMonth(), d.date.getDate(), d.date.getHours());
-        return new Date(d.date.getFullYear(), d.date.getMonth(), d.date.getDate());
-      })
-      .sortValues(function(a, b) {return a.date - b.date;})
-      .entries(records);
-
-    // establish mean temperatures during that time period
-
-    var meanTempsByPeriod = recordsByTime.reduce(function(acc, period) {
-      acc.push({
-        date: new Date(period.key),
-        temperature: d3.mean(period.values, function(d) {return d.temperature;})
+    summaryQueue
+      .awaitAll(function() {
+        nestMap.initialize(nests);
+        populateMenu(nests);
+        navigateHash(nests);
       });
-      return acc;
-    }, []);
-
-    // assign mean temperature to nest
-
-    nest.records = meanTempsByPeriod;
-    return nest;
   }
 
-  function transformRecord(record) {
-    record.date = DATETIME_FORMAT.parse(record.record_datetime);
-    record.nest_id = +record.nest_id;
-    record.temperature = +record.temperature;
-    return record;
+  function nestJoinSamples(nest, samples) {
+    nest.samples = samples.map(function(sample) {
+      return transformSample(nest.nestDate, sample);
+    });
   }
 
-  function transformNest(nest) {
-    var newNest = {
-      id: +nest.nest_id,
-      name: nest.sensor_id + ':' + nest.comm_id + '(' + nest.nest_id + ')',
-      comm: nest.comm_id,
-      nestDate: DATE_FORMAT.parse(nest.nest_date),
-      lat: parseLatLong(nest.latitude),
-      lng: parseLatLong(nest.longitude),
-    }
+  function transformSample(startDate, sample) {
+    return {
+      date: addDays(startDate, +sample.tDayStart),
+      temperature: +sample.tempAvg / TEMP_FACTOR,
+      energyLow: +sample.energyLow,
+      energyHight: +sample.energyHight
+    };
+  }
 
-    return newNest;
+  function addDays(date, days) {
+    return new Date(date.getTime() + days * MS_INA_DAY);
+  }
+
+  function transformNest(nest, i) {
+    var sensor = nest['Sensor #'];
+    var commId = nest['Comm ID #'];
+
+    return {
+      id: i,
+      name: commId,
+      commId: commId,
+      sensor: sensor,
+      nestDate: DATE_FORMAT.parse(nest['Nest Date']),
+      lat: +nest['Lat'],
+      lng: +nest['Long'],
+      show: nest['Show on Map'].toLowerCase() == 'yes'
+    };
   }
 
   function parseLatLong(ll) {
@@ -128,7 +121,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
     var nestName = window.location.hash.substr(1);
     nests.forEach(function(nest) {
       if (nestName.toLowerCase() == nest.name.toLowerCase()) {
-        nestMap.zoomToNest(nest)
+        nestMap.zoomToNest(nest);
       }
     });
   }
@@ -139,7 +132,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
     nests.forEach(function(nest) {
       var a = $("<a/>").text(nest.name)
         .attr("href", "#" + nest.name.toLowerCase())
-        .on("click", function() {nestMap.zoomToNest(nest)});
+        .on("click", function() {nestMap.zoomToNest(nest);});
       var li = $("<li/>")
         .append(a);
       picker.append(li);
@@ -166,7 +159,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
 
       timeSeries.push({
         time: timeScale.invert(i / (sampleCount - 1)),
-        value: valueScale(normalValue),
+        value: valueScale(normalValue)
       });
     }
 

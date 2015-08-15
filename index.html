@@ -4,13 +4,16 @@
     <link type="text/css" rel="stylesheet" href="css/style.css"/>
   </head>
   <body>
-    
+
     <!-- the navbar -->
 
     <nav class="navbar navbar-default" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">Turtle Sense Map</a>
+          <a class="navbar-brand" href="#">
+            <img class="logo" alt="Brand" src="resources/turtle_sense_logo.jpg">
+            Turtle Sense
+          </a>
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -19,7 +22,7 @@
               <ul class="nest-picker dropdown-menu" role="menu">
                 <!-- <li><a class="see-all" href="#all">See All</a></li> -->
                 <!-- <li class="divider"></li> -->
-              </ul> 
+              </ul>
             </li>
             <li><a class="see-all" href="#all">All Nests</a></li>
           </ul>
@@ -37,9 +40,9 @@
       <div class="nest-details">
         <div class="jumbotron">
           <h2 id="name"></h2>
-          <dl id="foobar" class="dl-horizontal">
+          <dl class="dl-horizontal">
             <dt>Date</dt><dd id="date"></dd>
-            <dt>Comm Id</dt><dd id="comm"></dd>
+            <dt>Sensor</dt><dd id="sensor"></dd>
           </dl>
           <div id="time-series"></div>
         </div>

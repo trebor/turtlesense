@@ -10,6 +10,16 @@ body {
   margin-bottom: 0px;
 }
 
+.navbar-brand {
+  padding-top: 6px;
+  padding-left: 8px;
+}
+
+.logo {
+  height: 40px;
+  padding-right: 3px;
+}
+
 .content {
   position: relative;
   flex: 1;
@@ -87,5 +97,12 @@ body {
 path.temperature {
   fill: none;
   stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+path.energyLow {
+  fill: none;
+  stroke: #888;
+  stroke-opacity: 0.5;
   stroke-width: 1.5px;
 }
