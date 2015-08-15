@@ -33,9 +33,9 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
   var nestMap = new NestMap($(".chart").get(0));
 
   queue()
-   .defer(d3.csv, 'data/nests.csv')
-   .defer(d3.csv, 'data/records.csv')
-   .await(onData);
+    .defer(d3.csv, 'data/nests.csv')
+    .defer(d3.csv, 'data/records.csv')
+    .await(onData);
 
   function onData(error, nests, records) {
     if (error) {
@@ -58,6 +58,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
 
     nests = nests
       .map(transformNest)
+      .filter(function(nest) {return nest.show;})
       .filter(function(nest) {return recordsMap[nest.id] && nest.lng > -80;})
       .map(function(nest) {return nestJoinRecords(nest, recordsMap[nest.id]);})
       .sort(function(a, b) {return a.name.localeCompare(b.name);});
@@ -103,18 +104,15 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
   }
 
   function transformNest(nest, i) {
-    var newNest = {
+    return {
       id: i,
       name: nest['Sensor #'] + ':' + nest['Comm ID #'] + '(' + i + ')',
       comm: nest['Comm ID #'],
       nestDate: DATE_FORMAT.parse(nest['Nest Date']),
       lat: +nest['Lat'],
-      lng: +nest['Long']
+      lng: +nest['Long'],
+      show: nest['Show on Map'].toLowerCase() == 'yes'
     };
-
-    console.log("newNest.nestDate", newNest.nestDate);
-
-    return newNest;
   }
 
   function parseLatLong(ll) {
