@@ -10,6 +10,16 @@ body {
   margin-bottom: 0px;
 }
 
+.navbar-brand {
+  padding-top: 6px;
+  padding-left: 8px;
+}
+
+.logo {
+  height: 40px;
+  padding-right: 3px;
+}
+
 .content {
   position: relative;
   flex: 1;
