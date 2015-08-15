@@ -1,25 +1,31 @@
-nest_id,"nest_date","sensor_id","comm_id","latitude","longitude","clutch_datetime",active
-1,"2014-08-12","AA0028","C-AA0002","3513.8727N","07531.6505","0000-00-00 00:00:00",1
-2,"2014-08-06","AA0017","C-AA0015","3525.8081N","07529.0768","0000-00-00 00:00:00",0
-3,"2014-07-13","AA0009","C-AA0002","3514.2339N","07531.5784","0000-00-00 00:00:00",1
-4,"2014-07-28","AA0014","C-AA0003","3514.0678N","07535.0056","0000-00-00 00:00:00",1
-5,"2014-08-27","AA0027","C-AA0006","3513.8721N","07531.6479","0000-00-00 00:00:00",1
-6,"2014-07-13","AA0008","C-AA0014","3515.0057N","07531.3981","0000-00-00 00:00:00",1
-7,"2014-07-20","AA0011","C-AA0015","3746.3292N","12226.3645","0000-00-00 00:00:00",1
-8,"2014-06-20","AA0013","C-AA0016","3746.3898N","12226.3516","0000-00-00 00:00:00",1
-9,"2014-07-23","AA0012","C-AA0007","3513.4195N","07538.7212","0000-00-00 00:00:00",0
-10,"2014-08-10","AA0025","C-AA0007","3513.9796N","07536.0986","0000-00-00 00:00:00",1
-11,"2014-08-21","AA0026","C-AA0014","3516.5384N","07531.0389","0000-00-00 00:00:00",1
-12,"2014-09-24","AA0012","C-AA0013","3513.8760N","07531.6479","0000-00-00 00:00:00",1
-13,"2014-07-22","AA0024","C-AA0012","3746.3331N","12226.3722","0000-00-00 00:00:00",0
-14,"2014-07-16","AA0010","C-AA0006","3513.1929N","07539.5168","0000-00-00 00:00:00",1
-15,"2014-10-02","AA0007","C-AA0012","3516.5422N","07531.0363","0000-00-00 00:00:00",1
-16,"2014-07-31","AA0024","H-AA0005","3516.1728N","07531.0930","0000-00-00 00:00:00",1
-17,"2014-07-31","AA0017","H-AA0005","3515.1441N","07531.9929","0000-00-00 00:00:00",1
-18,"2014-07-08","AA0004","C-AA0014","3514.0774N","07534.8910","0000-00-00 00:00:00",1
-19,"2014-05-31","AA0006","C-AA0004","3746.3222N","12226.3645","0000-00-00 00:00:00",1
-20,"2014-05-31","AA0001","C-AA0004","3746.3170N","12226.3645","0000-00-00 00:00:00",1
-21,"2014-05-31","AA0005","C-AA0004","3746.3125N","12226.3645","0000-00-00 00:00:00",1
-22,"2014-05-31","AA0003","C-AA0004","3746.3138N","12226.3632","0000-00-00 00:00:00",0
-23,"2014-06-30","AA0003","C-AA0017","3514.7907N","07531.4702","0000-00-00 00:00:00",1
-24,"2014-07-31","AA0002","C-AA0001","3746.3241N","12226.3747","0000-00-00 00:00:00",1
+Sensor #,Nest,Nest Date,Registration Date,Depth to top eggs (cm),Location,Show on Map,Lat,Long,Comm Install Date,Comm ID #,First prediction date,Predicted dates and notes,Depression date,First Emergence observed,Last Emergence observed,Excavation Date, Live hatchlings in nest at excavation ,Field Notes,Chart link,Reporting Status,Equipment notes,Data  notes,,
+AA0005,NH002,5/23/2015,5/31/2015,34,1.95 mi S of R38,Yes,35.29313,-75.51367,6/16/2015,C-AA0002,7/18/2015,First prediction of 7/20 revised to 7/21 or 7/22 the next day,7/22/2015,7/22 - 1 hatchling,7/25 - about 5,7/26/2015, 1 ,"Sensor would not register on 5/23 but did  on 5/31.  Crack on bottom 1/2 of set screw.  7/8-wrapped comm head crack with ""Rescue"" tape.",NH002 data (sensor AA0005),reporting,reset 7/2,,,
+AA0006,NH003,5/25/2015,5/25/2015,23,1.2 mi N of R43,Yes,35.25177,-75.52267,6/16/2015,C-AA0016,7/20/2015,24-Jul,7/22/2015,7/23/2015,7/27/2015,7/26/2015, 5 ,"Possible hairline crack on bottom 1/2 of set screw. 7/8-looks more like a scratch in the PVC than a crack but wrapped comm head with ""Rescue"" tape anyway.",NH003 data (sensor AA0006),reporting,,,,
+AA0007,NH004,5/29/2015,5/29/2015,20.5,1.25 W of R49,Yes,35.22837,-75.62617,6/16/2015,C-AA0015,7/20/2015,"No predictions were made on 7/19, but it might have been possible.  Original prediction was7/23/2015",7/22/2015,7/23/2015,7/25/2015,7/27/2015, 4 ,,NH004 data (sensor AA0007),reporting,reset 6/22,3 minute subdivisions,,
+AA0009,NH007R,5/31/2015,5/31/2015,27.4,0.07 mi N of R44,Yes,35.23105,-75.52757,7/6/2015,C-AA0003,none,Noisy data obscured hatching activity,7/21/2015,7/21/2015,7/23/2015,7/24/2015, 6 ,"Nest hatched on 7-21-15, excavated on 7-24-15.  Possible that this nest hatched early (day 51 for May nest!) because it was relocated to a high, dry location?!  111 egg shells, 12 unhatched eggs (8 undeveloped, 4 pipped dead).  One live hatchling had ""shoulder"" caught behind cable and was trapped in the nest.  Nothing observed to account for erratic (active) graph for this nest.",NH007R data (sensor AA0009),reporting. Reset a couple of times,,Very active nest. Is there something else living here?,,
+AA0010,NH013,6/2/2015,6/2/2015,29,2 mi S of R30,Yes,35.40933,-75.48563,6/16/2015,C-AA0012,8/8/2015,Some activity started on day 68. Emergence predicted around 8/12 or 8/13 but not considered very likely,, ,,,,Nest was borderline for relocation but it was decided to leave it in place.  May be subject to overwash especially if a storm comes through. Installed IR camera on 7/27/15. Replaced SD card on 7/30.,NH013 data (sensor AA0010),reporting,,,,
+AA0011,NH015,6/3/2015,6/3/2015,38,1.41 mi S of R34,Yes,35.35665,-75.49863,6/16/2015,C-AA0013,7/27/2015,7/30 or 7/31,7/29/2015,"7/28 - 3 hatchlings, boil on the 29th",,7/31/2015, 3 ,Installed IR camera on 7/27/15.  Replaced SD card on 7/30 and someone had turned the camera on the evening of 7/27-no hatchlings recorded.,NH015 data (sensor AA0011),reporting,,,,
+AA0013,NH014,6/3/2015,6/3/2015,19,1.1 mi W of R49,Yes,35.22890,-75.62365,7/7/2015,C-AA0006,7/23/2015,7/26 or 7/27.  Hatching activity first noticed on 7/22,7/27/2015,7/27/2015,7/29/2015,7/30/2015,0 ,,NH014 data (sensor AA0013),reporting,,,,
+AA0014,NH018,6/5/2015,6/5/2015,35,0.8 mi N of R43,Yes,35.24712,-75.52438,7/8/2015,C-AA0010,7/28/2015,7/31 or 8/1,7/30/2015,7/31/2015,8/3/2015,8/4/2015, 18 ,Installed IR camera on 7/30 and removed on 8/3.,NH018 data (sensor AA0014),reporting,,,,
+AA0016,NH022,6/9/2015,6/9/2015,45,2.3 mi S of R38,Yes,35.28785,-75.51466,7/24/2015,C-AA0014,7/27/2015,29-Jul,7/30/2015,7/30/2015,8/1/2015,8/4/2015, 3 ,Nest near high tide line.,NH022 data (sensor AA0016),reporting,,,,
+AA0017,NH023,6/10/2015,6/10/2015,31.4,0.84 mi N of R43,Yes,35.24730,-75.52437,7/24/2015,C-AA0007,8/2/2015,7-Aug,8/5/2015,8/7/2015,8/10/2015,8/10/2015, 1 ,"With HIOC interns.  8/4-As per Sam's request, I checked the connection on the comm tower and it looked good.  The one thing I did notice was that this was one of that cables that had ""rescue"" tape on the cable where the outer sheath had been torn/pinched.  I put new parafilm around the bottle.  ",NH023 data (sensor AA0017),reporting. Reset a couple of times,Possible bad connection.  Rewrap with Parafilm suggested,Some lost data with resets,,
+AA0025,NH024,6/12/2015,6/12/2015,27,0.2 mi S of R44,Yes,35.22693,-75.52814,7/27/2015,C-AA002,8/1/2015,6-Aug,---,8/8/2015,Washed out on 8/9,---,0,,NH024 data (sensor AA0025),reporting,,3 minute subdivisions (8/7),,
+AA0024,NH036,6/16/2015,6/16/2015,25,Ramp 45,Yes,35.22925,-75.54712,7/27/2015,C-AA0003,8/8/2015,12-Aug,,,,,,Testing comm tower to see if the reason data from nest NH007R was so erratic was from comm tower C-AA0003 (or sensor).,NH036 data (sensor AA0024),"No problem with the reporting, so the strange data was probably from the sensor (AA0009)",,3 minute subdivisions (8/7),,
+AA0020,NH041,6/18/2015,6/18/2015,35.5,0.5 mi E of R45,Yes,35.22528,-75.53847,7/28/2015,C-AA0015,8/9/2015,Aug 13 or Aug 14th,,,,,,,NH041 data (sensor AA0020),reporting,,3 minute subdivisions (8/7),,
+AA0026,NH055R,6/24/2015,6/24/2015,26,2.4 mi N of R43,No,35.26973,-75.51823,7/30/2015,C-AA0016,,,,,,,,WPT,NH055R data (sensor AA0026),reporting,,3 minute subdivisions (8/7),,
+AA0027,NH056,6/24/2015,6/24/2015,30.5,0.8 mi N of R55,No,35.20902,-75.69111,8/3/2015,C-AA0013,,,,,,,,WPT,NH056 data (sensor AA0027),reporting,,3 minute subdivisions (8/7),,
+AA0028,NH058,6/25/2015,6/25/2015,30,1.1 mi N of R43,No,35.25060,-75.52324,8/3/2015,C-AA0006,,,,,,,,WPT.  Outer sheath torn on comm head cable.  Repaired with Parafilm in field.,NH058 data (sensor AA0028),reporting,,3 minute subdivisions (8/7),,
+AA0029,NH074,7/1/2015,7/1/2015,30,1.35 mi W of R49,No,35.22799,-75.62791,8/5/2015,C-AA0010,,,,,,,,,NH074 data (sensor AA0029),,,3 minute subdivisions (8/7),,
+AA0004,NH078,7/2/2015,7/2/2015,37.7,1.81 mi S of R38,No,35.29514,-75.51302,8/8/2015,C-AA0014,,,,,,,,,,,,,,
+AA0008,NH085,7/6/2015,7/6/2015,36,0.05 mi S of R44,No,35.22946,-75.52776,8/11/2015,C-AA0002,,,,,,,,Very small eggs!,,,,,,
+AA0012,NH087,7/7/2015,7/7/2015,23,0.37 mi E of R49,No,35.23320,-75.59814,,,,,,,,,,Sand VERY hard.  Don't know how she dug her cavity!  Nest was submerged under standing water.  8/11-Nest was submerged under water upon arrival.  It is almost definite that this nest will not hatch.  Decided not to put a comm tower on this nest.,,,,,,
+AA0015,NH094,7/9/2015,7/9/2015,33.3,0.18 mi S of R44,No,35.22757,-75.52805,8/11/2015,C-AA0007,,,,,,,,,,,,,,
+AA0018,NH105,7/16/2015,7/16/2015,19,1.0 mi E of R49,No,35.23405,-75.58690,,,,,,,,,,,,,,,,
+AA0019,NH134R,7/24/2015,7/24/2015,30.5,0.88 mi E of R49,No,35.23423,-75.58908,,,,,,,,,,Nest was submerged at original location.,,,,,,
+AA0005,NH139R,7/28/2015,7/28/2015,29,0.48 mi N of R43,No,35.24223,-75.52555,,,,,,,,,,,,,,,,
+AA0009,NH138,7/28/2015,7/28/2015,28,0.73 mi E of R49,No,35.23407,-75.59189,,,,,,,,,,Potentially bad sensor.  Would not register the first time I pressed the button on the hand held unit.  Turned the unit off and on again and this time it registered the sensor.  There were also problems with the readings in the previous nest that used this sensor (NH007R),,,,,,
+AA0021,NH142R,7/29/2015,7/29/2015,30,1.56 mi N of R55,No,35.21337,-75.67859,,,,,,,,,,Pill bottle stops short of sign post.,,,,3 minute subdivisions (8/7),,
+AA0006,NH143R,7/30/2015,7/30/2015,32,0.15 mi N of R44,No,35.23201,-75.52751,,,,,,,,,,,,,,,,
+AA0007,NH151R,8/4/2015,8/4/2015,50,0.28 mi N of R43,No,35.23940,-75.52654,,,,,,,,,,This is a green turtle nest (Chelonia mydas)!,,,,,,
+AA0013,NH157,8/10/2015,8/10/2015,26,1.05 mi W of R49,No,35.22915,-75.62277,,,,,,,,,,Small eggs!,,,,,,
+AA0011,NH158R,8/11/2015,8/11/2015,31,1.05 mi N of R43,No,35.25032,-75.52342,,,,,,,,,,,,,,,,

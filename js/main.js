@@ -24,7 +24,7 @@ requirejs.config({
 
 define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue, bs, NestMap) {
 
-  var DATE_FORMAT = d3.time.format("%Y-%m-%d");
+  var DATE_FORMAT = d3.time.format("%m/%d/%Y");
   var DATETIME_FORMAT = d3.time.format("%Y-%m-%d %H:%M:%S");
   var LAT_LONG_REGEX = /(\d{2,3})(\d{2}\.\d{4})([NESW]?)/g;
 
@@ -102,15 +102,17 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
     return record;
   }
 
-  function transformNest(nest) {
+  function transformNest(nest, i) {
     var newNest = {
-      id: +nest.nest_id,
-      name: nest.sensor_id + ':' + nest.comm_id + '(' + nest.nest_id + ')',
-      comm: nest.comm_id,
-      nestDate: DATE_FORMAT.parse(nest.nest_date),
-      lat: parseLatLong(nest.latitude),
-      lng: parseLatLong(nest.longitude)
+      id: i,
+      name: nest['Sensor #'] + ':' + nest['Comm ID #'] + '(' + i + ')',
+      comm: nest['Comm ID #'],
+      nestDate: DATE_FORMAT.parse(nest['Nest Date']),
+      lat: +nest['Lat'],
+      lng: +nest['Long']
     };
+
+    console.log("newNest.nestDate", newNest.nestDate);
 
     return newNest;
   }
