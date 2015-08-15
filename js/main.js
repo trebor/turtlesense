@@ -24,6 +24,7 @@ requirejs.config({
 
 define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue, bs, NestMap) {
 
+  var DATA_PATH = 'data/';
   var DATE_FORMAT = d3.time.format("%m/%d/%Y");
   var DATETIME_FORMAT = d3.time.format("%Y-%m-%d %H:%M:%S");
   var LAT_LONG_REGEX = /(\d{2,3})(\d{2}\.\d{4})([NESW]?)/g;
@@ -33,8 +34,8 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
   var nestMap = new NestMap($(".chart").get(0));
 
   queue()
-    .defer(d3.csv, 'data/nests.csv')
-    .defer(d3.csv, 'data/records.csv')
+    .defer(d3.csv, DATA_PATH + 'nests.csv')
+    .defer(d3.csv, DATA_PATH + 'records.csv')
     .await(onData);
 
   function onData(error, nests, records) {
