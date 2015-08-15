@@ -40,7 +40,7 @@ var module = function() {
       .css("top", position.y - yOffset)
       .show();
   }
-  
+
   function hide() {
     $nestDetail.hide();
   }
@@ -49,8 +49,8 @@ var module = function() {
     show: show,
     hide: hide,
     setOffset: function(_offset) {offset = _offset / Math.sqrt(2);}
-  }
-  
+  };
+
   return exports;
 };
 

@@ -17,7 +17,7 @@ requirejs.config({
     googleMap:  '../js/components/googlemap'
   },
   shim: {
-    bootstrap: {deps: ['jquery']},
+    bootstrap: {deps: ['jquery']}
   }
 });
 
@@ -26,7 +26,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
 
   var DATE_FORMAT = d3.time.format("%Y-%m-%d");
   var DATETIME_FORMAT = d3.time.format("%Y-%m-%d %H:%M:%S");
-  var LAT_LONG_REGEX = /(\d{2,3})(\d{2}\.\d{4})([NESW]?)/g
+  var LAT_LONG_REGEX = /(\d{2,3})(\d{2}\.\d{4})([NESW]?)/g;
 
   // construct the map
 
@@ -50,7 +50,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
     // construct map of records grouped by nest ID
 
     var recordsMap = d3.nest()
-      .key(function(d) {return +d.nest_id})
+      .key(function(d) {return +d.nest_id;})
       .sortValues(function(a, b) {return a.date - b.date;})
       .map(records);
 
@@ -59,8 +59,8 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
     nests = nests
       .map(transformNest)
       .filter(function(nest) {return recordsMap[nest.id] && nest.lng > -80;})
-      .map(function(nest) {return nestJoinRecords(nest, recordsMap[nest.id])})
-      .sort(function(a, b) {return a.name.localeCompare(b.name)});
+      .map(function(nest) {return nestJoinRecords(nest, recordsMap[nest.id]);})
+      .sort(function(a, b) {return a.name.localeCompare(b.name);});
 
     nestMap.initialize(nests);
     populateMenu(nests);
@@ -109,8 +109,8 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
       comm: nest.comm_id,
       nestDate: DATE_FORMAT.parse(nest.nest_date),
       lat: parseLatLong(nest.latitude),
-      lng: parseLatLong(nest.longitude),
-    }
+      lng: parseLatLong(nest.longitude)
+    };
 
     return newNest;
   }
@@ -128,7 +128,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
     var nestName = window.location.hash.substr(1);
     nests.forEach(function(nest) {
       if (nestName.toLowerCase() == nest.name.toLowerCase()) {
-        nestMap.zoomToNest(nest)
+        nestMap.zoomToNest(nest);
       }
     });
   }
@@ -139,7 +139,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
     nests.forEach(function(nest) {
       var a = $("<a/>").text(nest.name)
         .attr("href", "#" + nest.name.toLowerCase())
-        .on("click", function() {nestMap.zoomToNest(nest)});
+        .on("click", function() {nestMap.zoomToNest(nest);});
       var li = $("<li/>")
         .append(a);
       picker.append(li);
@@ -166,7 +166,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
 
       timeSeries.push({
         time: timeScale.invert(i / (sampleCount - 1)),
-        value: valueScale(normalValue),
+        value: valueScale(normalValue)
       });
     }
 

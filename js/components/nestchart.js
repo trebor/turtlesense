@@ -49,7 +49,7 @@ var module = function($chartNode, customOptions, extendedEvents) {
     svg.append("path")
       .classed("temperature", true);
   }
-  
+
   function setNest(nest) {
     x.domain(d3.extent(nest.records, function(d) { return d.date; }));
     y.domain(d3.extent(nest.records, function(d) { return d.temperature; }));
@@ -81,7 +81,7 @@ var module = function($chartNode, customOptions, extendedEvents) {
 
   initialize();
   return $.extend(exports, baseChart);
-}
+};
 
 // end module
 

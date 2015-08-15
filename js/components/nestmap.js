@@ -3,7 +3,7 @@ define(['d3', 'googleMap', 'nestDetail'], function(d3, GoogleMap, NestDetail) {
 var module = function(chartNode, customOptions, events) {
 
   var defaultOptions = {
-  }
+  };
 
   var EGG_COUNT = 4;
   var EGG_LIGHT = 'white';
@@ -49,8 +49,8 @@ var module = function(chartNode, customOptions, events) {
     return {
       lat: latScale(Math.random()),
       lng: lonScale(Math.random()),
-      radius: radScale(Math.random()),
-    }
+      radius: radScale(Math.random())
+    };
   }
 
   function initialize(_nests) {
@@ -224,8 +224,8 @@ var module = function(chartNode, customOptions, events) {
 
   function setNestState(state, nest) {
     d3.selectAll('.nest')
-      .classed(STATE_PINNED,  function(d) {return d == nest && state == STATE_PINNED})
-      .classed(STATE_HOVERED, function(d) {return d == nest && state == STATE_HOVERED});
+      .classed(STATE_PINNED,  function(d) {return d == nest && state == STATE_PINNED;})
+      .classed(STATE_HOVERED, function(d) {return d == nest && state == STATE_HOVERED;});
   }
 
   function zoomToNest(nest) {
@@ -245,7 +245,7 @@ var module = function(chartNode, customOptions, events) {
     initialize: initialize,
     zoomToNest: zoomToNest,
     zoomToAll: zoomToAll
-  }
+  };
 
   return $.extend({}, gMap, exports);
 };

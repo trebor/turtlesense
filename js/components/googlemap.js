@@ -27,15 +27,15 @@ var module = function(chartNode, customOptions, extendedEvents) {
       ]
     }
   ];
-  
+
   var defaultOptions = {
     zoom: 4,
     center: new google.maps.LatLng(36, -95),
     styles: mapStyling,
     panControlOptions: {position: google.maps.ControlPosition.RIGHT_TOP},
     zoomControlOptions: {position: google.maps.ControlPosition.RIGHT_TOP},
-    streetViewControl: false,
-  }; 
+    streetViewControl: false
+  };
 
   var options = $.extend({}, defaultOptions, customOptions);
 
@@ -93,7 +93,7 @@ var module = function(chartNode, customOptions, extendedEvents) {
     d3.select(overlayLayerDiv)
       .style("left", mapOffset.x)
       .style("top", mapOffset.y);
-    
+
     // adjust any layers to match offset
 
     layers.forEach(function(layer) {
@@ -143,7 +143,7 @@ var module = function(chartNode, customOptions, extendedEvents) {
     var bounds = map.getBounds();
     var latlng = {
       lat: bounds.getNorthEast().lat(),
-      lng: bounds.getSouthWest().lng(),
+      lng: bounds.getSouthWest().lng()
     };
     return latLngToScreen(latlng, overlay);
   }
@@ -175,17 +175,17 @@ var module = function(chartNode, customOptions, extendedEvents) {
     getOrigin: getOrigin,
     getOffset: getOffset,
     getSvg: function() {return svg;},
-    getZoom: function() {return map.getZoom()},
+    getZoom: function() {return map.getZoom();},
     addMapEventListener: addMapEventListener,
     removeMapEventListener: removeMapEventListener,
     createLayer: createLayer,
     zoomToFit: zoomToFit,
     zoomToPoint: zoomToPoint,
     latLngToScreen: latLngToScreen,
-    setSatellite: function() {map.setMapTypeId(google.maps.MapTypeId.SATELLITE)},
-    setRoadmap: function() {map.setMapTypeId(google.maps.MapTypeId.ROADMAP)},
+    setSatellite: function() {map.setMapTypeId(google.maps.MapTypeId.SATELLITE);},
+    setRoadmap: function() {map.setMapTypeId(google.maps.MapTypeId.ROADMAP);},
     visualize: function() {},
-    setData: function() {},
+    setData: function() {}
   };
 
   return $.extend(exports, dispatch);

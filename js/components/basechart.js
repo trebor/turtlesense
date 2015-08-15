@@ -11,13 +11,13 @@ var module = function($chartNode, customOptions, extendedEvents) {
   var height;
   var container;
   var options = {
-    resizeDebounceMs: 200,
-  }
+    resizeDebounceMs: 200
+  };
 
   // declare events
 
   var events = ['chartResize'];
-  if (extendedEvents) 
+  if (extendedEvents)
     events = events.concat(extendedEvents);
   var dispatch = d3.dispatch.apply(d3, events);
 
@@ -48,9 +48,9 @@ var module = function($chartNode, customOptions, extendedEvents) {
     setDimensions();
 
     // watch for resize events
-    
+
     $chartNode.resize(function() {
-      (!width || !height) ? resize() : debouncedResize()
+      (!width || !height) ? resize() : debouncedResize();
     });
 
     // setDimensions();
@@ -113,11 +113,11 @@ var module = function($chartNode, customOptions, extendedEvents) {
 
     setDimensions: setDimensions,
     setOptions: setOptions,
-    getOptions: getOptions,
+    getOptions: getOptions
   };
 
   return $.extend(exports, dispatch);
-}
+};
 
 // end module
 
