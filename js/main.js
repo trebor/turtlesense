@@ -24,6 +24,7 @@ requirejs.config({
 
 define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue, bs, NestMap) {
 
+  var TEMP_FACTOR = 25.6;
   var MS_INA_DAY = 86400000;
   var DATA_PATH = 'data/';
   // var DATA_PATH = '/nests/';
@@ -81,7 +82,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
   function transformSample(startDate, sample) {
     return {
       date: addDays(startDate, +sample.tDayStart),
-      temperature: +sample.tempAvg / 10,
+      temperature: +sample.tempAvg / TEMP_FACTOR,
       energyLow: +sample.energyLow,
       energyHight: +sample.energyHight
     };
