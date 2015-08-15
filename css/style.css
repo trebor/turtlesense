@@ -99,3 +99,10 @@ path.temperature {
   stroke: steelblue;
   stroke-width: 1.5px;
 }
+
+path.energyLow {
+  fill: none;
+  stroke: #888;
+  stroke-opacity: 0.5;
+  stroke-width: 1.5px;
+}

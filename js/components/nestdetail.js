@@ -8,7 +8,7 @@ var module = function() {
   var $nestDetail = $(".nest-details");
   var $name = $nestDetail.find("#name");
   var $date = $nestDetail.find("#date");
-  var $comm = $nestDetail.find("#comm");
+  var $sensor = $nestDetail.find("#sensor");
   var $timeSeries = $nestDetail.find("#time-series");
   var $parent = $nestDetail.parent();
 
@@ -31,7 +31,7 @@ var module = function() {
 
     $name.text(nest.name);
     $date.text(DATE_FORMAT(nest.nestDate));
-    $comm.text(nest.comm);
+    $sensor.text(nest.sensor);
 
     // show detial
 
