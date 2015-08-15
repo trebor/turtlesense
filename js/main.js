@@ -38,7 +38,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
   var nestMap = new NestMap($(".chart").get(0));
 
   queue()
-    .defer(d3.csv, DATA_PATH + 'nests.csv')
+    .defer(d3.csv, DATA_PATH + 'Nest_Data.csv')
     .await(onData);
 
   function onData(error, nests) {
