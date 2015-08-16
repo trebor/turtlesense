@@ -24,6 +24,8 @@ requirejs.config({
 
 define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue, bs, NestMap) {
 
+  console.log("window.location.hostname", window.location.hostname);
+
   var TEMP_FACTOR = 25.6;
   var MS_INA_DAY = 86400000;
   var DATA_PATH = 'data/';
