@@ -95,14 +95,10 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
   }
 
   function transformNest(nest, i) {
-    var sensor = nest['Sensor #'];
-    var commId = nest['Comm ID #'];
-
     return {
       id: i,
-      name: commId,
-      commId: commId,
-      sensor: sensor,
+      name: nest['Nest'],
+      sensor: nest['Sensor #'],
       nestDate: DATE_FORMAT.parse(nest['Nest Date']),
       lat: +nest['Lat'],
       lng: +nest['Long'],
