@@ -61,22 +61,30 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
   });
 
   function setNest(nest) {
-    chart.load({
-      json: nest.samples,
-      axes: {
-        energyHigh: 'y',
-        energyLow: 'y',
-        temperature: 'y2'
-      },
-      types: {
-        energyHigh: 'area',
-        energyLow: 'area'
-      },
-      keys: {
-        x: 'date',
-        value: ['energyHigh', 'energyLow', 'temperature']
-      }
-    });
+
+    if (nest.samples.length > 0) {
+      chart.load({
+        json: nest.samples,
+        axes: {
+          energyHigh: 'y',
+          energyLow: 'y',
+          temperature: 'y2'
+        },
+        types: {
+          energyHigh: 'area',
+          energyLow: 'area'
+        },
+        keys: {
+          x: 'date',
+          value: ['energyHigh', 'energyLow', 'temperature']
+        }
+      });
+    }
+    else {
+      chart.unload({
+        ids: ['energyHigh', 'energyLow', 'temperature']
+      });
+    }
   }
 
   function valueFormat(value, ratio, id) {
