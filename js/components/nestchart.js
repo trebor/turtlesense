@@ -1,5 +1,9 @@
 define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, customOptions, extendedEvents) {
 
+  var TMP_COLOR = 'rgba(33, 102, 172, 0.7)';
+  var NRG_COLOR = 'rgba(178, 24,  43, 0.7)';
+
+  var titleFormat = d3.time.format("%d %b %y %H:%M:%S");
   var tempColorScale = d3.scale.linear()
     .range(['red', 'blue'])
     .domain([0, 30]);
@@ -18,7 +22,12 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
     },
     data: {
       columns: [],
-      color: color
+      color: color,
+      colors: {
+        temperature: TMP_COLOR,
+        energyLow: NRG_COLOR,
+        energyHigh: NRG_COLOR
+      }
     },
     point: {
       show: false
@@ -36,8 +45,14 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
         type: 'timeseries',
         tick: {
           count: 8,
-          format: '%d %b'
+          format: '%d %b %y'
         }
+      }
+    },
+    tooltip: {
+      format: {
+        title: titleFormat,
+        value: valueFormat
       }
     }
   });
@@ -46,31 +61,29 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
     chart.load({
       json: nest.samples,
       axes: {
-        energyLow: 'y',
         energyHigh: 'y',
+        energyLow: 'y',
         temperature: 'y2'
       },
       types: {
-        // temperature: 'area'
+        energyHigh: 'area',
+        energyLow: 'area'
       },
       keys: {
         x: 'date',
-        value: ['temperature', 'energyLow', 'energyHigh']
+        value: ['energyHigh', 'energyLow', 'temperature']
       }
     });
   }
 
+  function valueFormat(value, ratio, id) {
+    return Math.round(value * 10) / 10;
+  }
+
   function color(color, datum) {
     switch (datum.id) {
-    // case 'temperature':
-      // var c = tempColorScale(datum.value);
-      // console.log(datum, c);
-      // // var c = '#0300fc';
-      // return c;
-      // var c = datum.index < 500 ? 'red' : 'blue';
-      // console.log(datum.index, c);
-      // return c;
-      // console.log("==================================================");
+    case 'energyLow':
+      return 'white';
     default:
       return color;
     }

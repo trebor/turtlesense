@@ -70,13 +70,13 @@ body {
   margin: 0px;
 }
 
-/* .nest-details .dl-horizontal dt { */
-/*   width: 70px; */
-/* } */
+.c3-area {
+  opacity: 1;
+}
 
-/* .nest-details .dl-horizontal dd { */
-/*   margin-left: 80px;  // dt width + 20; */
-/* } */
+.c3-line-temperature {
+  stroke-width: 1.5px;
+}
 
 #time-series {
   background: white;
