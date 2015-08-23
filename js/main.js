@@ -1,12 +1,13 @@
 requirejs.config({
   baseUrl: 'bower_components',
   paths: {
-    d3: 'd3/d3.min',
-    queue: 'queue-async/queue.min',
-    lodash: 'lodash/dist/lodash.min',
-    jquery: 'jquery/dist/jquery.min',
+    d3:        'd3/d3.min',
+    queue:     'queue-async/queue.min',
+    lodash:    'lodash/dist/lodash.min',
+    jquery:    'jquery/dist/jquery.min',
     bootstrap: 'bootstrap/dist/js/bootstrap.min',
     async:     'requirejs-plugins/src/async',
+    c3:        'c3/c3.min',
 
     // internal components
 
@@ -17,7 +18,8 @@ requirejs.config({
     googleMap:  '../js/components/googlemap'
   },
   shim: {
-    bootstrap: {deps: ['jquery']}
+    bootstrap: {deps: ['jquery']},
+    c3:        {deps: ['d3'    ]}
   }
 });
 
@@ -86,7 +88,7 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
       date: addDays(startDate, +sample.tDayStart),
       temperature: +sample.tempAvg / TEMP_FACTOR,
       energyLow: +sample.energyLow,
-      energyHight: +sample.energyHight
+      energyHigh: +sample.energyHigh
     };
   }
 

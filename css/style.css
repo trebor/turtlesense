@@ -68,41 +68,14 @@ body {
   margin: 0px;
 }
 
-.nest-details .dl-horizontal dt {
-  width: 70px;
-}
+/* .nest-details .dl-horizontal dt { */
+/*   width: 70px; */
+/* } */
 
-.nest-details .dl-horizontal dd {
-  margin-left: 80px;  // dt width + 20;
-}
+/* .nest-details .dl-horizontal dd { */
+/*   margin-left: 80px;  // dt width + 20; */
+/* } */
 
-.nest-details #time-series {
+#time-series {
   background: white;
-  width: 400px;
-  height: 200px;
-  margin-bottom: 10px;
-}
-
-.axis path,
-.axis line {
-  fill: none;
-  stroke: #000;
-  shape-rendering: crispEdges;
-}
-
-.x.axis path {
-  display: none;
-}
-
-path.temperature {
-  fill: none;
-  stroke: steelblue;
-  stroke-width: 1.5px;
-}
-
-path.energyLow {
-  fill: none;
-  stroke: #888;
-  stroke-opacity: 0.5;
-  stroke-width: 1.5px;
 }

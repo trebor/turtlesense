@@ -9,10 +9,9 @@ var module = function() {
   var $name = $nestDetail.find("#name");
   var $date = $nestDetail.find("#date");
   var $sensor = $nestDetail.find("#sensor");
-  var $timeSeries = $nestDetail.find("#time-series");
   var $parent = $nestDetail.parent();
 
-  var chart = new NestChart($timeSeries);
+  var chart = new NestChart("#time-series");
 
   function show(position, nest) {
 
