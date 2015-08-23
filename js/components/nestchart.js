@@ -1,12 +1,10 @@
 define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, customOptions, extendedEvents) {
 
-  var TMP_COLOR = 'rgba(33, 102, 172, 0.7)';
-  var NRG_COLOR = 'rgba(178, 24,  43, 0.7)';
+  var colors = d3.scale.category10();
+  var TMP_COLOR = colors(0);
+  var NRG_COLOR = colors(1);
 
   var titleFormat = d3.time.format("%d %b %y %H:%M:%S");
-  var tempColorScale = d3.scale.linear()
-    .range(['red', 'blue'])
-    .domain([0, 30]);
 
   var chart = c3.generate({
     bindto: chartNode,
@@ -14,11 +12,11 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
         enabled: true
     },
     padding: {
-      top: 10
+      top: 25
     },
     size: {
-      height: 240,
-      width: 480
+      height: 300,
+      width: 500
     },
     data: {
       columns: [],
@@ -27,6 +25,11 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
         temperature: TMP_COLOR,
         energyLow: NRG_COLOR,
         energyHigh: NRG_COLOR
+      },
+      names: {
+        temperature: 'Temperature',
+        energyLow: 'Energy Low',
+        energyHigh: 'Energy High'
       }
     },
     point: {
@@ -34,11 +37,11 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
     },
     axis: {
       y: {
-        label: 'energy',
+        label: 'Energy',
         max: 20
       },
       y2: {
-        label: 'temperature',
+        label: 'Temperature',
         show: true
       },
       x: {

@@ -61,6 +61,14 @@ body {
   opacity: 0;
 }
 
+.nest-details .dl-horizontal dt {
+  width: 70px;
+}
+
+.nest-details .dl-horizontal dd {
+  margin-left: 80px;
+}
+
 .nest-details > .jumbotron {
   background: eee;
   border: 1px solid #bbb;
