@@ -26,8 +26,6 @@ requirejs.config({
 
 define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue, bs, NestMap) {
 
-  console.log("window.location.hostname", window.location.hostname);
-
   var TEMP_FACTOR = 25.6;
   var MS_INA_DAY = 86400000;
   var HOME_HOST = 'nps.turtlesense.org';
@@ -121,7 +119,9 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
     var nestName = window.location.hash.substr(1);
     nests.forEach(function(nest) {
       if (nestName.toLowerCase() == nest.name.toLowerCase()) {
-        nestMap.zoomToNest(nest);
+        setTimeout(function() {
+          nestMap.zoomToNest(nest);
+        }, 100);
       }
     });
   }
