@@ -138,31 +138,4 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
       picker.append(li);
     });
   }
-
-  function generateRandomTimeSeries(timeScale, valueScale, sampleCount, volitility) {
-    volitility = volitility || .1;
-    var volitilityScale = d3.scale.linear().range([-volitility, volitility]);
-    var timeSeries = [];
-    var normalValue = Math.random();
-
-    // create samples
-
-    for (var i = 0; i < sampleCount; ++i) {
-
-      // compute value normal
-
-      var dNormal = volitilityScale(Math.random());
-      normalValue += dNormal;
-      normalValue = d3.max([0, d3.min([1, normalValue])]);
-
-      // create record
-
-      timeSeries.push({
-        time: timeScale.invert(i / (sampleCount - 1)),
-        value: valueScale(normalValue)
-      });
-    }
-
-    return timeSeries;
-  }
 });

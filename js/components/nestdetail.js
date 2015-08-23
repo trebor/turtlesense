@@ -35,6 +35,7 @@ var module = function() {
     // show detial
 
     $nestDetail
+      .css("opacity", 1)
       .css("left", position.x - xOffset)
       .css("top", position.y - yOffset)
       .show();

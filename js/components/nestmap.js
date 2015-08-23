@@ -45,6 +45,8 @@ var module = function(chartNode, customOptions, events) {
   var nestLayer;
   var nests;
 
+  nestDetail.hide();
+
   function genPoint() {
     return {
       lat: latScale(Math.random()),

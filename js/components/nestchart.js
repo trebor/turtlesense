@@ -1,7 +1,14 @@
 define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, customOptions, extendedEvents) {
 
+  var tempColorScale = d3.scale.linear()
+    .range(['red', 'blue'])
+    .domain([0, 30]);
+
   var chart = c3.generate({
     bindto: chartNode,
+    zoom: {
+        enabled: true
+    },
     padding: {
       top: 10
     },
@@ -10,7 +17,8 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
       width: 480
     },
     data: {
-      columns: []
+      columns: [],
+      color: color
     },
     point: {
       show: false
@@ -21,16 +29,14 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
         max: 20
       },
       y2: {
-        show: true,
-        label: 'temperature'
+        label: 'temperature',
+        show: true
       },
       x: {
         type: 'timeseries',
         tick: {
-          format: '%d %b',
-          culling: {
-            max: 8
-          }
+          count: 8,
+          format: '%d %b'
         }
       }
     }
@@ -44,11 +50,30 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
         energyHigh: 'y',
         temperature: 'y2'
       },
+      types: {
+        // temperature: 'area'
+      },
       keys: {
         x: 'date',
         value: ['temperature', 'energyLow', 'energyHigh']
       }
     });
+  }
+
+  function color(color, datum) {
+    switch (datum.id) {
+    // case 'temperature':
+      // var c = tempColorScale(datum.value);
+      // console.log(datum, c);
+      // // var c = '#0300fc';
+      // return c;
+      // var c = datum.index < 500 ? 'red' : 'blue';
+      // console.log(datum.index, c);
+      // return c;
+      // console.log("==================================================");
+    default:
+      return color;
+    }
   }
 
   // exports

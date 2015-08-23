@@ -54,9 +54,11 @@ body {
 }
 
 .nest-details {
-  pointer-events: none;
   position: absolute;
-  display: none;
+  top: 10px;
+  left: 10px;
+  z-index: 99;
+  opacity: 0;
 }
 
 .nest-details > .jumbotron {
