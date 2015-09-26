@@ -212,6 +212,7 @@ var module = function(chartNode, customOptions, events) {
     nestDetail.show({x: 8, y: 8}, nest);
     pinnedNest = nest;
     setNestState(STATE_PINNED, nest);
+    window.location.hash = nest.name.toLowerCase();
   }
 
   function unpinNest() {
