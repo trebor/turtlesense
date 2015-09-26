@@ -4,10 +4,13 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
   var TMP_COLOR = colors(0);
   var NRG_COLOR = colors(1);
 
-  var titleFormat = d3.time.format("%d %b %y %H:%M:%S");
+  var titleFormat = d3.time.format("%d %b %H:%M");
 
   var chart = c3.generate({
     bindto: chartNode,
+    transition: {
+      duration: 0
+    },
     zoom: {
         enabled: true
     },
@@ -48,7 +51,7 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
         type: 'timeseries',
         tick: {
           count: 8,
-          format: '%d %b %y'
+          format: '%d %b'
         }
       }
     },
@@ -82,6 +85,9 @@ define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, c
     }
     else {
       chart.unload({
+        transition: {
+          duration: 0
+        },
         ids: ['energyHigh', 'energyLow', 'temperature']
       });
     }
