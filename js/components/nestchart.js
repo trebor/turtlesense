@@ -1,8 +1,7 @@
-define(['jquery', 'd3', 'c3'], function($, d3, c3) {return function(chartNode, customOptions, extendedEvents) {
+define(['jquery', 'c3', 'colors'], function($, c3, colors) {return function(chartNode, customOptions, extendedEvents) {
 
-  var colors = d3.scale.category10();
-  var TMP_COLOR = colors(0);
-  var NRG_COLOR = colors(1);
+  var TMP_COLOR = colors(colors.BLUE, colors.LIGHT, 0.3);
+  var NRG_COLOR = colors(colors.RED , colors.LIGHT, 0.8);
 
   var titleFormat = d3.time.format("%d %b %H:%M");
 

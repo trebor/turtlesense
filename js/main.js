@@ -15,7 +15,8 @@ requirejs.config({
     nestMap:    '../js/components/nestmap',
     nestDetail: '../js/components/nestdetail',
     nestChart:  '../js/components/nestchart',
-    googleMap:  '../js/components/googlemap'
+    googleMap:  '../js/components/googlemap',
+    colors:     '../js/components/colors'
   },
   shim: {
     bootstrap: {deps: ['jquery']},
