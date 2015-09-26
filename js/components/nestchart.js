@@ -1,7 +1,7 @@
 define(['jquery', 'c3', 'colors'], function($, c3, colors) {return function(chartNode, customOptions, extendedEvents) {
 
   var TMP_COLOR = colors(colors.BLUE, colors.LIGHT, 0.3);
-  var NRG_COLOR = colors(colors.RED , colors.LIGHT);
+  var NRG_COLOR = colors(colors.RED , colors.LIGHT, 0.7);
 
   var titleFormat = d3.time.format("%d %b %H:%M");
 
@@ -21,6 +21,7 @@ define(['jquery', 'c3', 'colors'], function($, c3, colors) {return function(char
       width: 500
     },
     data: {
+      empty: {label: {text: "No data for this nest."}},
       columns: [],
       color: color,
       colors: {
