@@ -128,15 +128,22 @@ define(['d3', 'jquery', 'queue', 'bootstrap', 'nestMap'], function (d3, $, queue
   }
 
   function populateMenu(nests) {
-    $(".see-all").on("click", nestMap.zoomToAll);
-    var picker = $(".nest-picker");
-    nests.forEach(function(nest) {
-      var a = $("<a/>").text(nest.name)
-        .attr("href", "#" + nest.name.toLowerCase())
-        .on("click", function() {nestMap.zoomToNest(nest);});
-      var li = $("<li/>")
-        .append(a);
-      picker.append(li);
-    });
+    d3.select('.see-all').on('click', nestMap.zoomToAll);
+
+    d3.select('.nest-picker')
+      .selectAll('li')
+      .data(nests)
+      .enter()
+      .append('li')
+      .classed('nest-menu-item', true)
+      .append('a')
+      .attr('href', function(d) {return '#' + d.name.toLowerCase();})
+      .on("click", function(d) {nestMap.zoomToNest(d);})
+      .text(function(d) {return d.name;})
+      .filter(function(d) {return d.samples.length > 0;})
+      .append('span')
+      .classed('pull-right', true)
+      .classed('glyphicon', true)
+      .classed('glyphicon-stats', true);
   }
 });
